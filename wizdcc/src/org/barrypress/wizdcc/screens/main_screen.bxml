@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window xmlns:bxml="http://pivot.apache.org/bxml" xmlns:effects="org.apache.pivot.wtk.effects" xmlns:content="org.apache.pivot.wtk.content" xmlns:etool="com.proquest.efeeds.etool.client" xmlns="org.apache.pivot.wtk" maximized="true">
+  <bxml:define>
+    <bxml:include bxml:id="mainMenu" src="main_menu.bxml"/>
+  </bxml:define>
+  <content>
+  </content>
+</Window>

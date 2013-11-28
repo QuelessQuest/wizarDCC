@@ -1,0 +1,22 @@
+<Sheet bxml:id="mainMenu" title="WizarDCC Main Menu" styles="{backgroundColor:'#1F2428'}"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns="org.apache.pivot.wtk">
+    <content>
+        <TablePane preferredWidth="320" preferredHeight="125">
+            <columns>
+                <TablePane.Column width="1*"/>
+            </columns>
+            <rows>
+				<TablePane.Row height="-1">
+					<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'center', verticalAlignment: 'center'}">
+            			<PushButton bxml:id="characterButton" buttonData="Manage Characters" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+            			<PushButton bxml:id="partyButton" buttonData="Manage Party" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+            			<PushButton bxml:id="saveButton" buttonData="Save Data" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/> 
+            			<PushButton bxml:id="loadButton" buttonData="Load Data" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>                                   
+            			<PushButton bxml:id="adventureButton" buttonData="Adventure with Party" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+            		</BoxPane>                    
+                </TablePane.Row>
+           </rows>
+        </TablePane>
+    </content>
+</Sheet>

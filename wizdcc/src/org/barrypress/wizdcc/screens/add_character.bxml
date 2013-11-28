@@ -1,0 +1,51 @@
+<Sheet bxml:id="addChar" title="WizarDCC Character Creator" styles="{backgroundColor:'#1F2428'}"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns="org.apache.pivot.wtk">
+    <content>
+        <TablePane preferredWidth="640" preferredHeight="300">
+            <columns>
+                <TablePane.Column width="1*"/>
+            </columns>
+            <rows>
+				<TablePane.Row height="1*">
+					<Border>
+                        <TablePane  styles="{backgroundColor:'#7B6A6E'}">
+                        	<columns>
+                        		<TablePane.Column width="1*"/>
+                        	</columns>
+                        	<rows>
+                        		<TablePane.Row height="1*">
+                        			<BoxPane>
+                        			</BoxPane>
+                        		</TablePane.Row>
+                        		<TablePane.Row height="-1">
+                        			<BoxPane styles="{horizontalAlignment: 'center'}">
+                        				<PushButton bxml:id="reroll" buttonData="Re-Roll Stats" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+                        			</BoxPane>
+                        		</TablePane.Row>
+                        	</rows>
+                        </TablePane>
+                      </Border>                   
+                </TablePane.Row>
+                <TablePane.Row height="-1">
+                	<TablePane>
+                        <columns>
+                            <TablePane.Column width="1*"/>
+                            <TablePane.Column width="-1"/>
+                        </columns>
+                        <rows>
+                            <TablePane.Row>
+                				<BoxPane>
+                					<PushButton bxml:id="saveChar" buttonData="Save Character" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+                				</BoxPane>
+								<BoxPane styles="{horizontalAlignment: 'right'}">
+									<PushButton bxml:id="cancelButton" buttonData="Cancel" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+								</BoxPane>
+							</TablePane.Row>
+						</rows>
+					</TablePane>
+                </TablePane.Row>
+           </rows>
+        </TablePane>
+    </content>
+</Sheet>
