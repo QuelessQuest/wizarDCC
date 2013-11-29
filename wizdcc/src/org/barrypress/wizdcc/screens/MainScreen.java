@@ -8,6 +8,8 @@ import org.apache.pivot.wtk.DesktopApplicationContext;
 import org.apache.pivot.wtk.Display;
 import org.apache.pivot.wtk.Window;
 
+import org.barrypress.wizdcc.util.WizDB;
+
 public class MainScreen implements Application {
 	
     @BXML private Window window = null;
@@ -16,7 +18,9 @@ public class MainScreen implements Application {
     private ManageCharacters manageCharacters = new ManageCharacters();
     private MainMenu menuDialog = new MainMenu();
     private AddCharacter addCharacter = new AddCharacter();
-
+    
+    private WizDB wizDB;
+    
 	public MainScreen() {
         instance = this;
     }
@@ -31,7 +35,9 @@ public class MainScreen implements Application {
         menuDialog.create();
         manageCharacters.create();
         addCharacter.create();
-                
+        
+        wizDB = new WizDB();
+                        
         window.setTitle("WizarDCC");
         window.open(display);
         window.requestFocus();       
@@ -59,6 +65,7 @@ public class MainScreen implements Application {
     public MainMenu getMainMenu() { return this.menuDialog; }
     public ManageCharacters getCharManager() { return this.manageCharacters; }
     public AddCharacter getCreateCharacter() { return this.addCharacter; }
+    public WizDB getWizDB() { return this.wizDB; }
     
     public static void main(String[] args) { DesktopApplicationContext.main(MainScreen.class, args); }
 

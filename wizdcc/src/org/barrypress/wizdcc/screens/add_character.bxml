@@ -15,7 +15,36 @@
                         	</columns>
                         	<rows>
                         		<TablePane.Row height="1*">
-                        			<BoxPane>
+                        			<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
+                        				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
+                              				<Label text="Name " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+											<TextInput bxml:id="cName" styles="{backgroundColor:'#D9D4D5'}"/>
+                        				</BoxPane>
+                        			    <Separator styles="{padding: 5}"/>
+                        				<BoxPane>
+                              				<Label text="Strength " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sStr" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              			</BoxPane>
+                              			<BoxPane>
+                              				<Label text="Dexterity " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sDex" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              			</BoxPane>
+                              			<BoxPane>
+                              				<Label text="Constitution " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sCon" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              			</BoxPane>
+                              			<BoxPane>
+                              				<Label text="Intelligence " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sInt" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              			</BoxPane>
+                              			<BoxPane>
+                              				<Label text="Wisdom " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sWis" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              			</BoxPane>
+                              			<BoxPane>
+                              				<Label text="Luck " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sLuc" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              			</BoxPane>
                         			</BoxPane>
                         		</TablePane.Row>
                         		<TablePane.Row height="-1">
