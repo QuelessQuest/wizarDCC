@@ -15,7 +15,7 @@ public class Character {
 		name      = "";
 		className = "";
 		classId   = 0;
-		level     = 0;
+		level     = 1;
 	}
 	
 	public void reRoll() {
@@ -23,7 +23,7 @@ public class Character {
 		name      = "";
 		className = "";
 		classId   = 0;
-		level     = 0;
+		level     = 1;
 		combatStats.clear();
 	}
 	

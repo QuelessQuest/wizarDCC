@@ -59,7 +59,7 @@ public class ManageParty implements BarryDialog {
             @Override
             public void buttonPressed(Button button) {
             	partySheet.close();
-            	MainScreen.getInstance().getCreateCharacter().open();
+            	MainScreen.getInstance().getSelectCharacter().open();
             }
         });
         
@@ -79,6 +79,9 @@ public class ManageParty implements BarryDialog {
                             CharacterFlatDB theRow = (CharacterFlatDB) partyView.getSelectedRow();
                             MainScreen.getInstance().getWizDB().deleteFromPartyWorkList(theRow.getId());
                             tableData.remove(theRow);
+                            if (tableData.getLength() < 6) {
+                            	addChar.setEnabled(true);
+                            }
                             partyView.setTableData(tableData);
                         }
                     }
@@ -107,6 +110,9 @@ public class ManageParty implements BarryDialog {
     public void open() {
     	loadParty();
     	partySheet.open(window);
+    	if (partyView.getTableData().getLength() >= 6) {
+    		addChar.setEnabled(false);
+    	}
     }
 	
     public Sheet getPartySheet() {

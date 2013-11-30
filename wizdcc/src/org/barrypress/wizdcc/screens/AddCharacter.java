@@ -134,6 +134,9 @@ public class AddCharacter implements BarryDialog {
     	if (guy.getClassName().isEmpty()) {
     		msg += "A Character Class must be selected! ";
     	}
+    	if (!MainScreen.getInstance().getWizDB().validateName(guy.getName())) {
+    		msg += "Character Name must be unique! ";
+    	}
     	if (!msg.isEmpty()) {
     		Prompt.prompt(MessageType.WARNING, msg, window);
     		valid = false;

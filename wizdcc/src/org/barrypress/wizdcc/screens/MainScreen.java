@@ -17,6 +17,7 @@ public class MainScreen implements Application {
     
     private ManageCharacters manageCharacters = new ManageCharacters();
     private ManageParty manageParty = new ManageParty();
+    private SelectCharacter selectCharacter = new SelectCharacter();
     private MainMenu menuDialog = new MainMenu();
     private AddCharacter addCharacter = new AddCharacter();
     
@@ -42,6 +43,7 @@ public class MainScreen implements Application {
         manageCharacters.create();
         manageParty.create();
         addCharacter.create();
+        selectCharacter.create();
                         
         window.setTitle("WizarDCC");
         window.open(display);
@@ -71,6 +73,7 @@ public class MainScreen implements Application {
     public ManageCharacters getCharManager() { return this.manageCharacters; }
     public ManageParty getPartyManager() { return this.manageParty; }
     public AddCharacter getCreateCharacter() { return this.addCharacter; }
+    public SelectCharacter getSelectCharacter() { return this.selectCharacter; }
     public WizDB getWizDB() { return this.wizDB; }
     
     public static void main(String[] args) { DesktopApplicationContext.main(MainScreen.class, args); }
