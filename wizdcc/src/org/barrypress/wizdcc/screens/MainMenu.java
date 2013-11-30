@@ -14,6 +14,7 @@ public class MainMenu implements BarryDialog {
     @BXML private Sheet  menuSheet;  
     
     @BXML private PushButton characterButton = null;
+    @BXML private PushButton partyButton     = null;
 
     public MainMenu() {}
 	
@@ -26,12 +27,21 @@ public class MainMenu implements BarryDialog {
         this.menuSheet = (Sheet) bxmlSheet.readObject(MainMenu.class, "main_menu.bxml");
         
         characterButton = (PushButton) bxmlSheet.getNamespace().get("characterButton");
+        partyButton     = (PushButton) bxmlSheet.getNamespace().get("partyButton");
         
         characterButton.getButtonPressListeners().add(new ButtonPressListener() {
             @Override
             public void buttonPressed(Button button) {
             	menuSheet.close();
                 MainScreen.getInstance().getCharManager().open();
+            }
+        });
+        
+        partyButton.getButtonPressListeners().add(new ButtonPressListener() {
+            @Override
+            public void buttonPressed(Button button) {
+            	menuSheet.close();
+                MainScreen.getInstance().getPartyManager().open();
             }
         });
 

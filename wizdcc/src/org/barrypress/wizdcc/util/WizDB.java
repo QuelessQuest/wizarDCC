@@ -59,11 +59,67 @@ public class WizDB {
     }
     
     public List<CharacterFlatDB> getCharacterWorkList() {
+    	return getWorkList("ClassWorkList");
+    }
+    
+    public void updateCharacterWorkList(Character guy) {
+    	
+    	try {
+    		Statement stmt = conn.createStatement();
+    		Integer maxId = 0;
+    		ResultSet rs = stmt.executeQuery("select max(id) as maxid from ClassWorkList");
+    		while (rs.next()) {
+    			maxId = rs.getInt("maxid") + 1;
+    		}
+    		
+    		String query = "insert into ClassWorkList values (";
+    		query += maxId.toString() + ", ";
+        	query += guy.getLevel().toString() + ", ";
+        	query += "'" + guy.getName() + "', ";
+        	query += "'" + guy.getClassName() + "', ";
+        	query += guy.getStats().getStrength().toString() + ", ";
+        	query += guy.getStats().getDexterity().toString() + ", ";
+        	query += guy.getStats().getConstitution().toString() + ", ";
+        	query += guy.getStats().getIntelligence().toString() + ", ";
+        	query += guy.getStats().getWisdom().toString() + ", ";
+        	query += guy.getStats().getLuck().toString() + ", ";
+        	query += guy.getCombatStats().getMaxHP().toString() + ", ";
+        	query += guy.getCombatStats().getMaxAC().toString() + ")";
+        	
+    		stmt.executeUpdate(query);
+    		stmt.close();
+    	} catch (Exception e) {
+    		System.out.println("EXCEPTION: " + e.getMessage());
+    		e.printStackTrace();
+    	}
+    }
+    
+    public void deleteFromCharacterWorkList(Integer id) {
+    	deleteFromWorkList(id, "ClassWorkList");
+    }
+    
+    public void clearCharacterWorkList() {
+    	clearWorkList("ClassWorkList");
+    }
+    
+    public List<CharacterFlatDB> getPartyWorkList() {
+    	return getWorkList("PartyWorkList");
+    }
+    
+    public void deleteFromPartyWorkList(Integer id) {
+    	deleteFromWorkList(id, "PartyWorkList");
+    }
+    
+    public void clearPartyWorkList() {
+    	clearWorkList("PartyWorkList");
+    }
+    
+    private List<CharacterFlatDB> getWorkList(String tableName) {
     	List<CharacterFlatDB> theList = new ArrayList<CharacterFlatDB>();
     	
     	try {
     		Statement stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("select id, level, name, className, strength, dexterity, constitution, intelligence, wisdom, luck, hp, ac from ClassWorkList");
+    		ResultSet rs = stmt.executeQuery("select id, level, name, className, strength, dexterity, constitution, intelligence, wisdom, luck, hp, ac from " + tableName);
     		
     		while (rs.next()) {
     			CharacterFlatDB aChar = new CharacterFlatDB();
@@ -90,55 +146,23 @@ public class WizDB {
     	}
     	
     	return theList;
-    }
-    
-    public void updateCharacterWorkList(Character guy) {
     	
-    	try {
-    		Statement stmt = conn.createStatement();
-    		Integer maxId = 0;
-    		ResultSet rs = stmt.executeQuery("select max(id) as maxid from ClassWorkList");
-    		while (rs.next()) {
-    			maxId = rs.getInt("maxid") + 1;
-    		}
-    		
-    		String query = "insert into ClassWorkList values (";
-    		query += maxId.toString() + ", ";
-        	query += guy.getLevel().toString() + ", ";
-        	query += "'" + guy.getName() + "', ";
-        	query += "'" + guy.getClassName() + "', ";
-        	query += guy.getStats().getStrength().toString() + ", ";
-        	query += guy.getStats().getDexterity().toString() + ", ";
-        	query += guy.getStats().getConstitution().toString() + ", ";
-        	query += guy.getStats().getIntelligence().toString() + ", ";
-        	query += guy.getStats().getWisdom().toString() + ", ";
-        	query += guy.getStats().getLuck().toString() + ", ";
-        	query += guy.getCombatStats().getMaxHP().toString() + ", ";
-        	query += guy.getCombatStats().getMaxAC().toString() + ")";
-        	System.out.println(query);
-        	
-    		stmt.executeUpdate(query);
-    		stmt.close();
-    	} catch (Exception e) {
-    		System.out.println("EXCEPTION: " + e.getMessage());
-    		e.printStackTrace();
-    	}
     }
     
-    public void deleteFromCharacterWorkList(Integer id) {
+    public void deleteFromWorkList(Integer id, String tableName) {
     	try {
     		Statement stmt = conn.createStatement();
-    		stmt.executeUpdate("delete from ClassWorkList where id = " + id.toString());
+    		stmt.executeUpdate("delete from " + tableName + " where id = " + id.toString());
     		stmt.close();
     	} catch (Exception e) {
     		//TODO
     	}
     }
     
-    public void clearCharacterWorkList() {
+    public void clearWorkList(String tableName) {
     	try {
     		Statement stmt = conn.createStatement();
-    		stmt.executeUpdate("delete from ClassWorkList");
+    		stmt.executeUpdate("delete from " + tableName);
     		stmt.close();
     	} catch (Exception e) {
     		//TODO

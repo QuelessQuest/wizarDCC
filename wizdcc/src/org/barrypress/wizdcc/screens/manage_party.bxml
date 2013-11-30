@@ -1,4 +1,4 @@
-<Sheet bxml:id="manageChars" title="WizarDCC Character Manager" styles="{backgroundColor:'#1F2428'}"
+<Sheet bxml:id="manageParty" title="WizarDCC Party Manager" styles="{backgroundColor:'#1F2428'}"
     xmlns:bxml="http://pivot.apache.org/bxml"
     xmlns="org.apache.pivot.wtk">
     <content>
@@ -10,7 +10,7 @@
 				<TablePane.Row height="1*">
 					<Border>
                         <ScrollPane horizontalScrollBarPolicy="fill_to_capacity" styles="{backgroundColor:'#7B6A6E'}">
-                          <TableView bxml:id="tableView" styles="{showHorizontalGridLines:false,includeTrailingVerticalGridLine:true,selectionBackgroundColor:'#345A78',highlightBackgroundColor:'#E0E1E3'}">
+                          <TableView bxml:id="partyView" styles="{showHorizontalGridLines:false,includeTrailingVerticalGridLine:true,selectionBackgroundColor:'#345A78',highlightBackgroundColor:'#E0E1E3'}">
                             <columns>
                               <TableView.Column maximumWidth="0" name="id" headerData=""/>
                               <TableView.Column width="30" name="Level" headerData="LVL"/>
@@ -27,7 +27,7 @@
                             </columns>
                           </TableView>
                           <columnHeader>
-                            <TableViewHeader bxml:id="tableViewHeader" tableView="$tableView" sortMode="single_column" styles="{backgroundColor:'#454042', color:'#FFFFFF',includeTrailingVerticalGridLine:true}"/>
+                            <TableViewHeader bxml:id="partyViewHeader" tableView="$partyView" sortMode="single_column" styles="{backgroundColor:'#454042', color:'#FFFFFF',includeTrailingVerticalGridLine:true}"/>
                           </columnHeader>
                         </ScrollPane>
                       </Border>                   
@@ -42,13 +42,13 @@
                         <rows>
                             <TablePane.Row>
                 				<BoxPane>
-                					<PushButton bxml:id="addChar" buttonData="Add Character" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+                					<PushButton bxml:id="addChar" buttonData="Add Character to Party" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
                 				</BoxPane>
                 				<BoxPane styles="{horizontalAlignment: 'center'}">
 									<PushButton bxml:id="backButton" buttonData="Menu" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
 								</BoxPane>
 								<BoxPane styles="{horizontalAlignment: 'right'}">
-									<PushButton bxml:id="delChar" buttonData="Remove Character" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+									<PushButton bxml:id="delChar" buttonData="Remove Character from Party" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
 								</BoxPane>
 							</TablePane.Row>
 						</rows>

@@ -16,6 +16,7 @@ public class MainScreen implements Application {
     private static MainScreen instance = null;
     
     private ManageCharacters manageCharacters = new ManageCharacters();
+    private ManageParty manageParty = new ManageParty();
     private MainMenu menuDialog = new MainMenu();
     private AddCharacter addCharacter = new AddCharacter();
     
@@ -33,11 +34,13 @@ public class MainScreen implements Application {
         
         wizDB = new WizDB();
         wizDB.clearCharacterWorkList();
+        wizDB.clearPartyWorkList();
         populateData();
         
         window = (Window) bxmlSerializer.readObject(MainScreen.class, "main_screen.bxml"); 
         menuDialog.create();
         manageCharacters.create();
+        manageParty.create();
         addCharacter.create();
                         
         window.setTitle("WizarDCC");
@@ -66,6 +69,7 @@ public class MainScreen implements Application {
     public Window getWindow() { return this.window; }
     public MainMenu getMainMenu() { return this.menuDialog; }
     public ManageCharacters getCharManager() { return this.manageCharacters; }
+    public ManageParty getPartyManager() { return this.manageParty; }
     public AddCharacter getCreateCharacter() { return this.addCharacter; }
     public WizDB getWizDB() { return this.wizDB; }
     
