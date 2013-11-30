@@ -125,6 +125,16 @@ public class WizDB {
     	}
     }
     
+    public void deleteFromCharacterWorkList(Integer id) {
+    	try {
+    		Statement stmt = conn.createStatement();
+    		stmt.executeUpdate("delete from ClassWorkList where id = " + id.toString());
+    		stmt.close();
+    	} catch (Exception e) {
+    		//TODO
+    	}
+    }
+    
     public void clearCharacterWorkList() {
     	try {
     		Statement stmt = conn.createStatement();

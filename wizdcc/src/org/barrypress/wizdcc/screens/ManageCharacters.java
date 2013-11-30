@@ -17,6 +17,8 @@ import org.apache.pivot.wtk.TableView;
 import org.apache.pivot.wtk.TableViewSelectionListener;
 import org.apache.pivot.wtk.Window;
 
+import org.barrypress.wizdcc.util.CharacterFlatDB;
+
 public class ManageCharacters implements BarryDialog { 
 	
     @BXML private Window window;
@@ -67,13 +69,16 @@ public class ManageCharacters implements BarryDialog {
             	Prompt prompt = new Prompt(MessageType.QUESTION, "Delete selected character?", options);
                 prompt.getStyles().put("backgroundColor", "#FF0000");
                 prompt.open(window, new SheetCloseListener() {
+                    @SuppressWarnings("unchecked")
                     @Override
                     public void sheetClosed(Sheet sheet) {
                         // Process an OK click. Any other option will simply close the sheet
                         if (sheet.getResult() && ((Prompt) sheet).getSelectedOptionIndex() == 1) {
                             sheet.close();
-                            List tableData = tableView.getTableData();
-                            tableData.remove(tableView.getSelectedRow());
+                            List<CharacterFlatDB> tableData = (List<CharacterFlatDB>) tableView.getTableData();
+                            CharacterFlatDB theRow = (CharacterFlatDB) tableView.getSelectedRow();
+                            MainScreen.getInstance().getWizDB().deleteFromCharacterWorkList(theRow.getId());
+                            tableData.remove(theRow);
                             tableView.setTableData(tableData);
                         }
                     }
