@@ -32,6 +32,7 @@ public class MainScreen implements Application {
         bxmlSerializer.getNamespace().put("WizarDCC", this); 
         
         wizDB = new WizDB();
+        wizDB.clearCharacterWorkList();
         populateData();
         
         window = (Window) bxmlSerializer.readObject(MainScreen.class, "main_screen.bxml"); 

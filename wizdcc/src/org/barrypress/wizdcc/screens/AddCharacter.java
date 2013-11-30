@@ -7,8 +7,11 @@ import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.ListButton;
 import org.apache.pivot.wtk.ListButtonSelectionListener;
+import org.apache.pivot.wtk.MessageType;
+import org.apache.pivot.wtk.Prompt;
 import org.apache.pivot.wtk.PushButton;
 import org.apache.pivot.wtk.Sheet;
+import org.apache.pivot.wtk.TextInput;
 import org.apache.pivot.wtk.Window;
 
 import org.barrypress.wizdcc.pc.Character;
@@ -27,6 +30,7 @@ public class AddCharacter implements BarryDialog {
     @BXML private PushButton cancelButton;
     @BXML private PushButton reroll;
     @BXML private PushButton saveChar;
+    @BXML private TextInput cName;
     
     private Character guy;
 
@@ -50,6 +54,7 @@ public class AddCharacter implements BarryDialog {
         cancelButton = (PushButton) bxmlSheet.getNamespace().get("cancelButton");
         reroll       = (PushButton) bxmlSheet.getNamespace().get("reroll");
         saveChar     = (PushButton) bxmlSheet.getNamespace().get("saveChar");
+        cName        = (TextInput)  bxmlSheet.getNamespace().get("cName");
         
         classList.setListData(MainScreen.getInstance().getWizDB().getClassList());
         
@@ -72,9 +77,10 @@ public class AddCharacter implements BarryDialog {
         saveChar.getButtonPressListeners().add(new ButtonPressListener() {
             @Override
             public void buttonPressed(Button button) {
-            	saveCharacter();
-            	charSheet.close();
-            	MainScreen.getInstance().getCharManager().open();
+            	if (saveCharacter()) {
+            		charSheet.close();
+            		MainScreen.getInstance().getCharManager().open();
+            	}
             }
         });
         
@@ -107,8 +113,33 @@ public class AddCharacter implements BarryDialog {
 	
     public void clear() {}
     
-    private void saveCharacter() {
+    private Boolean saveCharacter() {
+    	Boolean saved = false;
+    	if (validateCharacter()) {
+    		MainScreen.getInstance().getWizDB().updateCharacterWorkList(guy);
+    		saved = true;
+    	}
+    	return saved;
+    }
+    
+    private Boolean validateCharacter() {
     	
+    	String msg = "";
+    	Boolean valid = true;
+    	
+    	guy.setName(cName.getText());
+    	if (guy.getName().isEmpty()) {
+    		msg += "Character Name must be provided! ";
+    	}
+    	if (guy.getClassName().isEmpty()) {
+    		msg += "A Character Class must be selected! ";
+    	}
+    	if (!msg.isEmpty()) {
+    		Prompt.prompt(MessageType.WARNING, msg, window);
+    		valid = false;
+    	}
+
+    	return valid;
     }
     
     private void rePaint() {
@@ -119,6 +150,7 @@ public class AddCharacter implements BarryDialog {
     	sWis.setText(guy.getStats().getWisdom().toString());
     	sLuc.setText(guy.getStats().getLuck().toString());
     	classList.clearSelection();
+    	cName.setText("");
     }
 
 }

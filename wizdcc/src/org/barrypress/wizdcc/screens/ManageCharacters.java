@@ -2,10 +2,19 @@ package org.barrypress.wizdcc.screens;
 
 import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.BXMLSerializer;
+import org.apache.pivot.collections.ArrayList;
+import org.apache.pivot.collections.List;
+import org.apache.pivot.collections.Sequence;
 import org.apache.pivot.wtk.Button;
 import org.apache.pivot.wtk.ButtonPressListener;
+import org.apache.pivot.wtk.MessageType;
+import org.apache.pivot.wtk.Prompt;
 import org.apache.pivot.wtk.PushButton;
 import org.apache.pivot.wtk.Sheet;
+import org.apache.pivot.wtk.SheetCloseListener;
+import org.apache.pivot.wtk.Span;
+import org.apache.pivot.wtk.TableView;
+import org.apache.pivot.wtk.TableViewSelectionListener;
 import org.apache.pivot.wtk.Window;
 
 public class ManageCharacters implements BarryDialog { 
@@ -15,6 +24,9 @@ public class ManageCharacters implements BarryDialog {
     @BXML private PushButton addChar;
     @BXML private PushButton backButton;
     @BXML private PushButton delChar;
+    @BXML private TableView  tableView;
+    
+    private static final ArrayList<String> options = new ArrayList<String>("Cancel", "YES");
 
     public ManageCharacters() {}
 	
@@ -29,6 +41,9 @@ public class ManageCharacters implements BarryDialog {
         addChar    = (PushButton) bxmlSheet.getNamespace().get("addChar");
         backButton = (PushButton) bxmlSheet.getNamespace().get("backButton");
         delChar    = (PushButton) bxmlSheet.getNamespace().get("delChar");
+        tableView  = (TableView)  bxmlSheet.getNamespace().get("tableView");
+        
+        delChar.setEnabled(false);
         
         backButton.getButtonPressListeners().add(new ButtonPressListener() {
             @Override
@@ -49,8 +64,38 @@ public class ManageCharacters implements BarryDialog {
         delChar.getButtonPressListeners().add(new ButtonPressListener() {
             @Override
             public void buttonPressed(Button button) {
-            	
+            	Prompt prompt = new Prompt(MessageType.QUESTION, "Delete selected character?", options);
+                prompt.getStyles().put("backgroundColor", "#FF0000");
+                prompt.open(window, new SheetCloseListener() {
+                    @Override
+                    public void sheetClosed(Sheet sheet) {
+                        // Process an OK click. Any other option will simply close the sheet
+                        if (sheet.getResult() && ((Prompt) sheet).getSelectedOptionIndex() == 1) {
+                            sheet.close();
+                            List tableData = tableView.getTableData();
+                            tableData.remove(tableView.getSelectedRow());
+                            tableView.setTableData(tableData);
+                        }
+                    }
+                });    	
             }
+        });
+        
+        tableView.getTableViewSelectionListeners().add(new TableViewSelectionListener() {
+        	@Override
+        	public void selectedRangeAdded(TableView tv, int rangeStart, int rangeEnd) {}
+        	@Override
+        	public void selectedRangeRemoved(TableView tv, int rangeStart, int rangeEnd) {}
+        	@Override
+        	public void selectedRangesChanged(TableView tv, Sequence<Span> previousSelectedRanges) {}
+        	@Override
+        	public void selectedRowChanged(TableView tv, Object previousSelectedRow) {
+        		if (tv.getSelectedIndex() >= 0) {
+        			delChar.setEnabled(true);
+        		} else {
+        			delChar.setEnabled(false);
+        		}
+        	}
         });
     }
 	
@@ -70,7 +115,7 @@ public class ManageCharacters implements BarryDialog {
     public void clear() {}
     
     private void loadCharacters() {
-    	
+    	tableView.setTableData(MainScreen.getInstance().getWizDB().getCharacterWorkList());
     }
-	
+
 }

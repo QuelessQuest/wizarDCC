@@ -12,17 +12,18 @@
                         <ScrollPane horizontalScrollBarPolicy="fill_to_capacity" styles="{backgroundColor:'#7B6A6E'}">
                           <TableView bxml:id="tableView" styles="{showHorizontalGridLines:false,includeTrailingVerticalGridLine:true,selectionBackgroundColor:'#345A78',highlightBackgroundColor:'#E0E1E3'}">
                             <columns>
+                              <TableView.Column width="30" name="id" headerData="ID"/>
                               <TableView.Column width="30" name="Level" headerData="LVL"/>
-                              <TableView.Column name="Name" headerData="Name"/>
-                              <TableView.Column width="100" name="Class" headerData="Class"/>
-							  <TableView.Column width="30" name="Strength" headerData="STR"/>
-							  <TableView.Column width="30" name="Dexterity" headerData="DEX"/>
-							  <TableView.Column width="30" name="Constitution" headerData="CON"/>
-							  <TableView.Column width="30" name="Intelligence" headerData="INT"/>
-							  <TableView.Column width="30" name="Wisdom" headerData="WIS"/>
-							  <TableView.Column width="30" name="Luck" headerData="LUC"/>
-							  <TableView.Column width="30" name="HP" headerData="HP"/>
-							  <TableView.Column width="30" name="AC" headerData="AC"/>
+                              <TableView.Column name="name" headerData="Name"/>
+                              <TableView.Column width="100" name="className" headerData="Class"/>
+							  <TableView.Column width="30" name="strength" headerData="STR"/>
+							  <TableView.Column width="30" name="dexterity" headerData="DEX"/>
+							  <TableView.Column width="30" name="constitution" headerData="CON"/>
+							  <TableView.Column width="30" name="intelligence" headerData="INT"/>
+							  <TableView.Column width="30" name="wisdom" headerData="WIS"/>
+							  <TableView.Column width="30" name="luck" headerData="LUC"/>
+							  <TableView.Column width="30" name="hp" headerData="HP"/>
+							  <TableView.Column width="30" name="ac" headerData="AC"/>
                             </columns>
                           </TableView>
                           <columnHeader>
