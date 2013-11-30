@@ -14,13 +14,22 @@
                         		<TablePane.Column width="1*"/>
                         	</columns>
                         	<rows>
-                        		<TablePane.Row height="1*">
-                        			<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
+                        		<TablePane.Row height="-1">
+                        			<BoxPane styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
                         				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
                               				<Label text="Name " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-											<TextInput bxml:id="cName" styles="{backgroundColor:'#D9D4D5'}"/>
+											<TextInput bxml:id="cName"  preferredWidth="150" styles="{backgroundColor:'#D9D4D5'}"/>
                         				</BoxPane>
-                        			    <Separator styles="{padding: 5}"/>
+                        				<Label text=" " preferredWidth="70"/>
+                        				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
+                        					<Label text="Class " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+											<ListButton bxml:id="classList" styles="{backgroundColor:'#D9D4D5'}" minimumWidth="100"/>
+                        				</BoxPane>
+                        			</BoxPane>
+                        		</TablePane.Row>
+                        		<TablePane.Row height="1*">
+									<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
+                        				<Separator styles="{padding: 5}"/>
                         				<BoxPane>
                               				<Label text="Strength " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
                               				<Label bxml:id="sStr" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
@@ -45,7 +54,7 @@
                               				<Label text="Luck " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
                               				<Label bxml:id="sLuc" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
                               			</BoxPane>
-                        			</BoxPane>
+									</BoxPane>
                         		</TablePane.Row>
                         		<TablePane.Row height="-1">
                         			<BoxPane styles="{horizontalAlignment: 'center'}">

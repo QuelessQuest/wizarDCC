@@ -31,12 +31,13 @@ public class MainScreen implements Application {
     	BXMLSerializer bxmlSerializer = new BXMLSerializer();
         bxmlSerializer.getNamespace().put("WizarDCC", this); 
         
+        wizDB = new WizDB();
+        populateData();
+        
         window = (Window) bxmlSerializer.readObject(MainScreen.class, "main_screen.bxml"); 
         menuDialog.create();
         manageCharacters.create();
         addCharacter.create();
-        
-        wizDB = new WizDB();
                         
         window.setTitle("WizarDCC");
         window.open(display);
@@ -68,6 +69,10 @@ public class MainScreen implements Application {
     public WizDB getWizDB() { return this.wizDB; }
     
     public static void main(String[] args) { DesktopApplicationContext.main(MainScreen.class, args); }
+    
+    private void populateData() {
+    	
+    }
 
 
 

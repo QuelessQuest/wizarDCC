@@ -12,8 +12,17 @@
                         <ScrollPane horizontalScrollBarPolicy="fill_to_capacity" styles="{backgroundColor:'#7B6A6E'}">
                           <TableView bxml:id="tableView" styles="{showHorizontalGridLines:false,includeTrailingVerticalGridLine:true,selectionBackgroundColor:'#345A78',highlightBackgroundColor:'#E0E1E3'}">
                             <columns>
+                              <TableView.Column width="30" name="Level" headerData="LVL"/>
                               <TableView.Column name="Name" headerData="Name"/>
-							  <TableView.Column name="Stuff" headerData="Stuff"/>
+                              <TableView.Column width="100" name="Class" headerData="Class"/>
+							  <TableView.Column width="30" name="Strength" headerData="STR"/>
+							  <TableView.Column width="30" name="Dexterity" headerData="DEX"/>
+							  <TableView.Column width="30" name="Constitution" headerData="CON"/>
+							  <TableView.Column width="30" name="Intelligence" headerData="INT"/>
+							  <TableView.Column width="30" name="Wisdom" headerData="WIS"/>
+							  <TableView.Column width="30" name="Luck" headerData="LUC"/>
+							  <TableView.Column width="30" name="HP" headerData="HP"/>
+							  <TableView.Column width="30" name="AC" headerData="AC"/>
                             </columns>
                           </TableView>
                           <columnHeader>

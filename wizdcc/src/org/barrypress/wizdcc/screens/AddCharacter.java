@@ -5,6 +5,8 @@ import org.apache.pivot.beans.BXMLSerializer;
 import org.apache.pivot.wtk.Button;
 import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.Label;
+import org.apache.pivot.wtk.ListButton;
+import org.apache.pivot.wtk.ListButtonSelectionListener;
 import org.apache.pivot.wtk.PushButton;
 import org.apache.pivot.wtk.Sheet;
 import org.apache.pivot.wtk.Window;
@@ -21,6 +23,7 @@ public class AddCharacter implements BarryDialog {
     @BXML private Label sInt;
     @BXML private Label sWis;
     @BXML private Label sLuc;
+    @BXML private ListButton classList;
     @BXML private PushButton cancelButton;
     @BXML private PushButton reroll;
     @BXML private PushButton saveChar;
@@ -43,9 +46,12 @@ public class AddCharacter implements BarryDialog {
         sInt         = (Label)      bxmlSheet.getNamespace().get("sInt");
         sWis         = (Label)      bxmlSheet.getNamespace().get("sWis");
         sLuc         = (Label)      bxmlSheet.getNamespace().get("sLuc");
+        classList    = (ListButton) bxmlSheet.getNamespace().get("classList");
         cancelButton = (PushButton) bxmlSheet.getNamespace().get("cancelButton");
         reroll       = (PushButton) bxmlSheet.getNamespace().get("reroll");
         saveChar     = (PushButton) bxmlSheet.getNamespace().get("saveChar");
+        
+        classList.setListData(MainScreen.getInstance().getWizDB().getClassList());
         
         cancelButton.getButtonPressListeners().add(new ButtonPressListener() {
             @Override
@@ -70,6 +76,17 @@ public class AddCharacter implements BarryDialog {
             	charSheet.close();
             	MainScreen.getInstance().getCharManager().open();
             }
+        });
+        
+        classList.getListButtonSelectionListeners().add(new ListButtonSelectionListener() {
+            @Override
+            public void selectedItemChanged(ListButton listButton, Object previousSelectedItem) {
+            	guy.setClassName((String) classList.getSelectedItem());
+            	guy.setClassId(MainScreen.getInstance().getWizDB().getClassId(guy.getClassName()));
+            }
+
+            @Override
+            public void selectedIndexChanged(ListButton listButton, int previousSelectedIndex) {}
         });
     }
 	
@@ -101,6 +118,7 @@ public class AddCharacter implements BarryDialog {
     	sInt.setText(guy.getStats().getIntelligence().toString());
     	sWis.setText(guy.getStats().getWisdom().toString());
     	sLuc.setText(guy.getStats().getLuck().toString());
+    	classList.clearSelection();
     }
 
 }
