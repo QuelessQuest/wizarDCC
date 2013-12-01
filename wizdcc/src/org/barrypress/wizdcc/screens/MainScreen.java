@@ -4,15 +4,26 @@ import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.BXMLSerializer;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.wtk.Application;
+import org.apache.pivot.wtk.BoxPane;
+import org.apache.pivot.wtk.Button;
+import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.DesktopApplicationContext;
 import org.apache.pivot.wtk.Display;
+import org.apache.pivot.wtk.PushButton;
+import org.apache.pivot.wtk.CardPane;
+import org.apache.pivot.wtk.TablePane;
 import org.apache.pivot.wtk.Window;
 
 import org.barrypress.wizdcc.util.WizDB;
 
 public class MainScreen implements Application {
 	
-    @BXML private Window window = null;
+    @BXML private Window     window         = null;
+    @BXML private PushButton continueButton = null;
+    @BXML private CardPane   cardPane       = null;
+    @BXML private TablePane  titlePane      = null;
+    @BXML private BoxPane    blankPane      = null;
+    
     private static MainScreen instance = null;
     
     private ManageCharacters manageCharacters = new ManageCharacters();
@@ -39,17 +50,31 @@ public class MainScreen implements Application {
         populateData();
         
         window = (Window) bxmlSerializer.readObject(MainScreen.class, "main_screen.bxml"); 
+        
+        continueButton = (PushButton) bxmlSerializer.getNamespace().get("continueButton");
+        cardPane       = (CardPane)   bxmlSerializer.getNamespace().get("cardPane");
+        titlePane      = (TablePane)  bxmlSerializer.getNamespace().get("titlePane");
+        blankPane      = (BoxPane)    bxmlSerializer.getNamespace().get("blankPane");
+
         menuDialog.create();
         manageCharacters.create();
         manageParty.create();
         addCharacter.create();
         selectCharacter.create();
+        
+        continueButton.getButtonPressListeners().add(new ButtonPressListener() {
+            @Override
+            public void buttonPressed(Button button) {
+            	cardPane.setSelectedIndex(cardPane.indexOf(blankPane));
+            	menuDialog.open();
+            }
+        });
                         
         window.setTitle("WizarDCC");
         window.open(display);
-        window.requestFocus();       
-        menuDialog.open();
-
+        window.requestFocus();  
+        
+        cardPane.setSelectedIndex(cardPane.indexOf(titlePane));
     }
     
     @Override

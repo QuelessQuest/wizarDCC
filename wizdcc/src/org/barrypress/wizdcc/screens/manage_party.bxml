@@ -41,14 +41,14 @@
                         </columns>
                         <rows>
                             <TablePane.Row>
-                				<BoxPane>
+                				<BoxPane styles="{padding:5}">
                 					<PushButton bxml:id="addChar" buttonData="Add Character to Party" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
                 				</BoxPane>
-                				<BoxPane styles="{horizontalAlignment: 'center'}">
+                				<BoxPane styles="{padding:5, horizontalAlignment: 'center'}">
 									<PushButton bxml:id="backButton" buttonData="Menu" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
 								</BoxPane>
-								<BoxPane styles="{horizontalAlignment: 'right'}">
-									<PushButton bxml:id="delChar" buttonData="Remove Character from Party" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+								<BoxPane styles="{padding:5, horizontalAlignment: 'right'}">
+									<PushButton bxml:id="delChar" buttonData="Remove Character from Party" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF', disabledBackgroundColor:'#1F2428'}"/>
 								</BoxPane>
 							</TablePane.Row>
 						</rows>

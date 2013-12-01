@@ -57,7 +57,7 @@
 									</BoxPane>
                         		</TablePane.Row>
                         		<TablePane.Row height="-1">
-                        			<BoxPane styles="{horizontalAlignment: 'center'}">
+                        			<BoxPane styles="{padding:5, horizontalAlignment: 'center'}">
                         				<PushButton bxml:id="reroll" buttonData="Re-Roll Stats" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
                         			</BoxPane>
                         		</TablePane.Row>
@@ -73,10 +73,10 @@
                         </columns>
                         <rows>
                             <TablePane.Row>
-                				<BoxPane>
+                				<BoxPane styles="{padding:5}">
                 					<PushButton bxml:id="saveChar" buttonData="Save Character" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
                 				</BoxPane>
-								<BoxPane styles="{horizontalAlignment: 'right'}">
+								<BoxPane styles="{padding:5, horizontalAlignment: 'right'}">
 									<PushButton bxml:id="cancelButton" buttonData="Cancel" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
 								</BoxPane>
 							</TablePane.Row>

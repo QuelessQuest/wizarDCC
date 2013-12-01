@@ -41,10 +41,10 @@
                         </columns>
                         <rows>
                             <TablePane.Row>
-                				<BoxPane>
-                					<PushButton bxml:id="addChar" buttonData="Select Character" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+                				<BoxPane styles="{padding:5}">
+                					<PushButton bxml:id="addChar" buttonData="Select Character" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF', disabledBackgroundColor:'#1F2428'}"/>
                 				</BoxPane>
-								<BoxPane styles="{horizontalAlignment: 'right'}">
+								<BoxPane styles="{padding:5, horizontalAlignment: 'right'}">
 									<PushButton bxml:id="cancelButton" buttonData="Cancel" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
 								</BoxPane>
 							</TablePane.Row>

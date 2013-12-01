@@ -1,5 +1,8 @@
 package org.barrypress.wizdcc.pc;
 
+import org.apache.pivot.collections.ArrayList;
+import org.apache.pivot.collections.List;
+
 public class Character {
 	
 	private CombatStats combatStats;
@@ -8,10 +11,12 @@ public class Character {
 	private String name;
 	private String className;
 	private int classId;
+	private List<Equipment> equipment;
 	
 	public Character() {
 		combatStats = new CombatStats();
 		stats = new Stats();
+		equipment = new ArrayList<Equipment>();
 		name      = "";
 		className = "";
 		classId   = 0;
@@ -33,6 +38,7 @@ public class Character {
 	public String getClassName() { return className; }
 	public int getClassId() { return classId; }
 	public Integer getLevel() { return level; }
+	public List<Equipment> getEquipment() { return equipment; }
 	
 	public void setName(String nme) { name = nme; }
 	public void setClassName(String nme) { className = nme; }
