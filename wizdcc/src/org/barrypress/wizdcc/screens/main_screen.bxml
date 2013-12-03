@@ -12,7 +12,7 @@
 			<TablePane.Row height="1*">
 				<Border>
             		<CardPane bxml:id="cardPane">
-						<TablePane bxml:id="titlePane" styles="{backgroundColor:'#1F2428'}">
+						<TablePane bxml:id="titlePane" styles="{backgroundColor:'#2A1C11'}">
 							<columns>
 								<TablePane.Column width="1*"/>
 							</columns>
@@ -29,7 +29,7 @@
   								</TablePane.Row>
   							</rows>
   						</TablePane>
-  						<BoxPane bxml:id="blankPane" styles="{backgroundColor:'#9EAD84'}">
+  						<BoxPane bxml:id="blankPane" styles="{backgroundColor:'#8A7152'}">
   							<Label text=""/>
   						</BoxPane>
   					</CardPane>

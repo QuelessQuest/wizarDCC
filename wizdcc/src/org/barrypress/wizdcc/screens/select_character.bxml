@@ -17,10 +17,10 @@
                               <TableView.Column name="name" headerData="Name"/>
                               <TableView.Column width="100" name="className" headerData="Class"/>
 							  <TableView.Column width="30" name="strength" headerData="STR"/>
-							  <TableView.Column width="30" name="dexterity" headerData="DEX"/>
-							  <TableView.Column width="30" name="constitution" headerData="CON"/>
+							  <TableView.Column width="30" name="agility" headerData="AGI"/>
+							  <TableView.Column width="30" name="stamina" headerData="STA"/>
 							  <TableView.Column width="30" name="intelligence" headerData="INT"/>
-							  <TableView.Column width="30" name="wisdom" headerData="WIS"/>
+							  <TableView.Column width="30" name="personality" headerData="PER"/>
 							  <TableView.Column width="30" name="luck" headerData="LUC"/>
 							  <TableView.Column width="30" name="hp" headerData="HP"/>
 							  <TableView.Column width="30" name="ac" headerData="AC"/>

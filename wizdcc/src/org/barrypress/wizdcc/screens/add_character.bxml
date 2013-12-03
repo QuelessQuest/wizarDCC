@@ -1,4 +1,4 @@
-<Sheet bxml:id="addChar" title="WizarDCC Character Creator" styles="{backgroundColor:'#1F2428'}"
+<Sheet bxml:id="addChar" title="WizarDCC Character Creator" styles="{backgroundColor:'#2A1C11'}"
     xmlns:bxml="http://pivot.apache.org/bxml"
     xmlns="org.apache.pivot.wtk">
     <content>
@@ -9,21 +9,26 @@
             <rows>
 				<TablePane.Row height="1*">
 					<Border>
-                        <TablePane  styles="{backgroundColor:'#7B6A6E'}">
+                        <TablePane  styles="{backgroundColor:'#4E4035'}">
                         	<columns>
                         		<TablePane.Column width="1*"/>
                         	</columns>
                         	<rows>
                         		<TablePane.Row height="-1">
-                        			<BoxPane styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
+                        			<BoxPane styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'center'}">
                         				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
-                              				<Label text="Name " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-											<TextInput bxml:id="cName"  preferredWidth="150" styles="{backgroundColor:'#D9D4D5'}"/>
+                              				<Label text="Name " preferredWidth="40" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+											<TextInput bxml:id="cName"  preferredWidth="150" styles="{backgroundColor:'#8A7152'}"/>
                         				</BoxPane>
-                        				<Label text=" " preferredWidth="70"/>
+                        				<Label text=" " preferredWidth="30"/>
                         				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
-                        					<Label text="Class " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-											<ListButton bxml:id="classList" styles="{backgroundColor:'#D9D4D5'}" minimumWidth="100"/>
+                        					<Label text="Class/Race/Occupation " preferredWidth="130" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+											<Label bxml:id="className" preferredWidth="100" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                        				</BoxPane>
+                        				<Label text=" " preferredWidth="30"/>
+                        				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
+                        					<Label text="Alignment " preferredWidth="60" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                        					<ListButton bxml:id="alignment" listData="['Law', 'Neutral', 'Chaos']"  styles="{font:{size:9}, backgroundColor:'#8A7152', color:'#FFFFFF'}"/>
                         				</BoxPane>
                         			</BoxPane>
                         		</TablePane.Row>
@@ -32,33 +37,50 @@
                         				<Separator styles="{padding: 5}"/>
                         				<BoxPane>
                               				<Label text="Strength " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sStr" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sStr" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              				<Label bxml:id="mStr" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
                               			</BoxPane>
                               			<BoxPane>
-                              				<Label text="Dexterity " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sDex" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label text="Agility " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sAgi" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              				<Label bxml:id="mAgi" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
                               			</BoxPane>
                               			<BoxPane>
-                              				<Label text="Constitution " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sCon" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label text="Stamina " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sSta" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              				<Label bxml:id="mSta" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
                               			</BoxPane>
                               			<BoxPane>
+                              				<Label text="Personality " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sPer" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              				<Label bxml:id="mPer" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              			</BoxPane>
+										<BoxPane>
                               				<Label text="Intelligence " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sInt" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              			</BoxPane>
-                              			<BoxPane>
-                              				<Label text="Wisdom " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sWis" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sInt" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              				<Label bxml:id="mInt" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
                               			</BoxPane>
                               			<BoxPane>
                               				<Label text="Luck " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sLuc" text="00 " styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sLuc" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              				<Label bxml:id="mLuc" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              			</BoxPane>
+                              			<BoxPane>
+											<Label text=""/>
+                              			</BoxPane>
+                              			<BoxPane>
+                              				<Label text="Hit Points " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sHP" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              			</BoxPane>
+                              			<BoxPane>
+                              				<Label text="Armor Class " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              				<Label bxml:id="sAC" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
                               			</BoxPane>
 									</BoxPane>
                         		</TablePane.Row>
                         		<TablePane.Row height="-1">
                         			<BoxPane styles="{padding:5, horizontalAlignment: 'center'}">
-                        				<PushButton bxml:id="reroll" buttonData="Re-Roll Stats" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+                        				<PushButton bxml:id="reroll" buttonData="Re-Roll Stats" styles="{minimumAspectRatio:3, backgroundColor:'#4E4035', color:'#FFFFFF'}"/>
                         			</BoxPane>
                         		</TablePane.Row>
                         	</rows>
@@ -74,10 +96,10 @@
                         <rows>
                             <TablePane.Row>
                 				<BoxPane styles="{padding:5}">
-                					<PushButton bxml:id="saveChar" buttonData="Save Character" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+                					<PushButton bxml:id="saveChar" buttonData="Save Character" styles="{minimumAspectRatio:3, backgroundColor:'#4E4035', color:'#FFFFFF'}"/>
                 				</BoxPane>
 								<BoxPane styles="{padding:5, horizontalAlignment: 'right'}">
-									<PushButton bxml:id="cancelButton" buttonData="Cancel" styles="{minimumAspectRatio:3, backgroundColor:'#454042', color:'#FFFFFF'}"/>
+									<PushButton bxml:id="cancelButton" buttonData="Cancel" styles="{minimumAspectRatio:3, backgroundColor:'#4E4035', color:'#FFFFFF'}"/>
 								</BoxPane>
 							</TablePane.Row>
 						</rows>

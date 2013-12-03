@@ -9,6 +9,8 @@ import org.apache.pivot.collections.List;
 import org.apache.pivot.collections.ArrayList;
 
 import org.barrypress.wizdcc.pc.Character;
+import org.barrypress.wizdcc.pc.ZeroLevelOccupation;
+import org.barrypress.wizdcc.screens.MainScreen;
 
 public class WizDB {
 	
@@ -80,6 +82,43 @@ public class WizDB {
     	return getWorkList("ClassWorkList");
     }
     
+    public Boolean verifyFunnel() {
+    	Boolean valid = true;
+    	
+    	try {
+    		Statement stmt = conn.createStatement();
+    		Integer maxLvl = 0;
+    		ResultSet rs = stmt.executeQuery("select max(level) as mlvl from PartyWorkList");
+    		while (rs.next()) {
+    			maxLvl = rs.getInt("mlvl");
+    		}
+    		if (maxLvl > 0) {
+    			valid = false;
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return valid;
+    }
+    
+    public Integer getPartyCount() {
+    	Integer count = 0;
+    	
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select count(level) as mlvl from PartyWorkList");
+    		while (rs.next()) {
+    			count = rs.getInt("mlvl");
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return count;
+    	
+    }
+    
     public void loadData() {
     	clearList("ClassWorkList");
     	clearList("PartyWorkList");
@@ -107,35 +146,7 @@ public class WizDB {
     }
     
     public void updateCharacterWorkList(Character guy) {
-    	
-    	try {
-    		Statement stmt = conn.createStatement();
-    		Integer maxId = 0;
-    		ResultSet rs = stmt.executeQuery("select max(id) as maxid from ClassWorkList");
-    		while (rs.next()) {
-    			maxId = rs.getInt("maxid") + 1;
-    		}
-    		
-    		String query = "insert into ClassWorkList values (";
-    		query += maxId.toString() + ", ";
-        	query += guy.getLevel().toString() + ", ";
-        	query += "'" + guy.getName() + "', ";
-        	query += "'" + guy.getClassName() + "', ";
-        	query += guy.getStats().getStrength().toString() + ", ";
-        	query += guy.getStats().getDexterity().toString() + ", ";
-        	query += guy.getStats().getConstitution().toString() + ", ";
-        	query += guy.getStats().getIntelligence().toString() + ", ";
-        	query += guy.getStats().getWisdom().toString() + ", ";
-        	query += guy.getStats().getLuck().toString() + ", ";
-        	query += guy.getCombatStats().getMaxHP().toString() + ", ";
-        	query += guy.getCombatStats().getMaxAC().toString() + ")";
-        	
-    		stmt.executeUpdate(query);
-    		stmt.close();
-    	} catch (Exception e) {
-    		System.out.println("EXCEPTION: " + e.getMessage());
-    		e.printStackTrace();
-    	}
+    	updateWorkList(makeFlat(guy), "ClassWorkList");
     }
     
     public void deleteFromCharacterWorkList(Integer id) {
@@ -151,34 +162,7 @@ public class WizDB {
     }
     
     public void updatePartyWorkList(CharacterFlatDB guy) {
-    	
-    	try {
-    		Statement stmt = conn.createStatement();
-    		Integer maxId = 0;
-    		ResultSet rs = stmt.executeQuery("select max(id) as maxid from PartyWorkList");
-    		while (rs.next()) {
-    			maxId = rs.getInt("maxid") + 1;
-    		}
-    		
-    		String query = "insert into PartyWorkList values (";
-    		query += maxId.toString() + ", ";
-        	query += guy.getLevel().toString() + ", ";
-        	query += "'" + guy.getName() + "', ";
-        	query += "'" + guy.getClassName() + "', ";
-        	query += guy.getStrength().toString() + ", ";
-        	query += guy.getDexterity().toString() + ", ";
-        	query += guy.getConstitution().toString() + ", ";
-        	query += guy.getIntelligence().toString() + ", ";
-        	query += guy.getWisdom().toString() + ", ";
-        	query += guy.getLuck().toString() + ", ";
-        	query += guy.getHp().toString() + ", ";
-        	query += guy.getAc().toString() + ")";
-        	
-    		stmt.executeUpdate(query);
-    		stmt.close();
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    	}
+    	updateWorkList(guy, "PartyWorkList");
     }
     
     public void deleteFromPartyWorkList(Integer id) {
@@ -191,7 +175,7 @@ public class WizDB {
     
     public List<CharacterFlatDB> getAvailableWorkList() {
     	List<CharacterFlatDB> theList = new ArrayList<CharacterFlatDB>();
-		String query = "select id, level, name, className, strength, dexterity, constitution, intelligence, wisdom, luck, hp, ac from ";
+		String query = "select id, level, name, className, strength, agility, stamina, intelligence, personality, luck, hp, ac from ";
     	query += "ClassWorkList where not exists (select * from PartyWorkList where ";
 		query += "PartyWorkList.name = ClassWorkList.name)";
 		
@@ -206,10 +190,10 @@ public class WizDB {
     			aChar.setName(rs.getString("name"));
     			aChar.setClassName(rs.getString("className"));
     			aChar.setStrength(rs.getInt("strength"));
-    			aChar.setDexterity(rs.getInt("dexterity"));
-    			aChar.setConstitution(rs.getInt("constitution"));
+    			aChar.setAgility(rs.getInt("agility"));
+    			aChar.setStamina(rs.getInt("stamina"));
     			aChar.setIntelligence(rs.getInt("intelligence"));
-    			aChar.setWisdom(rs.getInt("wisdom"));
+    			aChar.setPersonality(rs.getInt("personality"));
     			aChar.setLuck(rs.getInt("luck"));
     			aChar.setHp(rs.getInt("hp"));
     			aChar.setAc(rs.getInt("ac"));
@@ -230,7 +214,7 @@ public class WizDB {
     	
     	try {
     		Statement stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("select id, level, name, className, strength, dexterity, constitution, intelligence, wisdom, luck, hp, ac from " + tableName);
+    		ResultSet rs = stmt.executeQuery("select id, level, name, className, strength, agility, stamina, intelligence, personality, luck, hp, ac from " + tableName);
     		
     		while (rs.next()) {
     			CharacterFlatDB aChar = new CharacterFlatDB();
@@ -239,10 +223,10 @@ public class WizDB {
     			aChar.setName(rs.getString("name"));
     			aChar.setClassName(rs.getString("className"));
     			aChar.setStrength(rs.getInt("strength"));
-    			aChar.setDexterity(rs.getInt("dexterity"));
-    			aChar.setConstitution(rs.getInt("constitution"));
+    			aChar.setAgility(rs.getInt("agility"));
+    			aChar.setStamina(rs.getInt("stamina"));
     			aChar.setIntelligence(rs.getInt("intelligence"));
-    			aChar.setWisdom(rs.getInt("wisdom"));
+    			aChar.setPersonality(rs.getInt("personality"));
     			aChar.setLuck(rs.getInt("luck"));
     			aChar.setHp(rs.getInt("hp"));
     			aChar.setAc(rs.getInt("ac"));
@@ -259,6 +243,55 @@ public class WizDB {
     	
     }
 
+    public void updateWorkList(CharacterFlatDB guy, String workList) {
+    	
+    	try {
+    		Statement stmt = conn.createStatement();
+    		Integer maxId = 0;
+    		ResultSet rs = stmt.executeQuery("select max(id) as maxid from " + workList);
+    		while (rs.next()) {
+    			maxId = rs.getInt("maxid") + 1;
+    		}
+    		
+    		String query = "insert into " + workList + " values (";
+    		query += maxId.toString() + ", ";
+        	query += guy.getLevel().toString() + ", ";
+        	query += "'" + guy.getName() + "', ";
+        	query += "'" + guy.getClassName() + "', ";
+        	query += guy.getStrength().toString() + ", ";
+        	query += guy.getAgility().toString() + ", ";
+        	query += guy.getStamina().toString() + ", ";
+        	query += guy.getIntelligence().toString() + ", ";
+        	query += guy.getPersonality().toString() + ", ";
+        	query += guy.getLuck().toString() + ", ";
+        	query += guy.getHp().toString() + ", ";
+        	query += guy.getAc().toString() + ")";
+        	
+    		stmt.executeUpdate(query);
+    		stmt.close();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+
+    public ZeroLevelOccupation getZeroLevelOccupation() {
+    	
+    	ZeroLevelOccupation zLvl = new ZeroLevelOccupation();
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select name, weapon, equipment from ZeroLevel where id = "); 
+    		while (rs.next()) {
+    			zLvl.setName(rs.getString("name"));
+    			zLvl.setWeapon(rs.getInt("weapon"));
+    			zLvl.setEquipment(rs.getInt("equipment"));
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+	
+    	return zLvl;   	
+    }
+    
     private void deleteFromWorkList(Integer id, String tableName) {
     	try {
     		Statement stmt = conn.createStatement();
@@ -277,6 +310,24 @@ public class WizDB {
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
+    }
+    
+    private CharacterFlatDB makeFlat(Character guy) {
+    	CharacterFlatDB flatGuy = new CharacterFlatDB();
+    	
+    	flatGuy.setAc(guy.getCombatStats().getMaxAC());
+    	flatGuy.setAgility(guy.getStats().getAgility());
+    	flatGuy.setClassName(guy.getClassName());
+    	flatGuy.setHp(guy.getCombatStats().getMaxHP());
+    	flatGuy.setIntelligence(guy.getStats().getIntelligence());
+    	flatGuy.setLevel(guy.getLevel());
+    	flatGuy.setLuck(guy.getStats().getLuck());
+    	flatGuy.setName(guy.getName());
+    	flatGuy.setPersonality(guy.getStats().getPersonality());
+    	flatGuy.setStamina(guy.getStats().getStamina());
+    	flatGuy.setStrength(guy.getStats().getStrength());
+    	
+    	return flatGuy;
     }
 
 }

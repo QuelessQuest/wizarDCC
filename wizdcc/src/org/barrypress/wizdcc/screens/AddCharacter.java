@@ -21,12 +21,21 @@ public class AddCharacter implements BarryDialog {
     @BXML private Window window;
     @BXML private Sheet  charSheet;  
     @BXML private Label sStr;
-    @BXML private Label sDex;
-    @BXML private Label sCon;
+    @BXML private Label sAgi;
+    @BXML private Label sSta;
     @BXML private Label sInt;
-    @BXML private Label sWis;
+    @BXML private Label sPer;
     @BXML private Label sLuc;
-    @BXML private ListButton classList;
+    @BXML private Label mStr;
+    @BXML private Label mAgi;
+    @BXML private Label mSta;
+    @BXML private Label mInt;
+    @BXML private Label mPer;
+    @BXML private Label mLuc;
+    @BXML private Label sHP;
+    @BXML private Label sAC;
+    @BXML private Label className;
+    @BXML private ListButton alignment;
     @BXML private PushButton cancelButton;
     @BXML private PushButton reroll;
     @BXML private PushButton saveChar;
@@ -45,18 +54,25 @@ public class AddCharacter implements BarryDialog {
         this.charSheet = (Sheet) bxmlSheet.readObject(AddCharacter.class, "add_character.bxml");
         
         sStr         = (Label)      bxmlSheet.getNamespace().get("sStr");
-        sDex         = (Label)      bxmlSheet.getNamespace().get("sDex");
-        sCon         = (Label)      bxmlSheet.getNamespace().get("sCon");
+        sAgi         = (Label)      bxmlSheet.getNamespace().get("sAgi");
+        sSta         = (Label)      bxmlSheet.getNamespace().get("sSta");
         sInt         = (Label)      bxmlSheet.getNamespace().get("sInt");
-        sWis         = (Label)      bxmlSheet.getNamespace().get("sWis");
+        sPer         = (Label)      bxmlSheet.getNamespace().get("sPer");
         sLuc         = (Label)      bxmlSheet.getNamespace().get("sLuc");
-        classList    = (ListButton) bxmlSheet.getNamespace().get("classList");
+        mStr         = (Label)      bxmlSheet.getNamespace().get("mStr");
+        mAgi         = (Label)      bxmlSheet.getNamespace().get("mAgi");
+        mSta         = (Label)      bxmlSheet.getNamespace().get("mSta");
+        mInt         = (Label)      bxmlSheet.getNamespace().get("mInt");
+        mPer         = (Label)      bxmlSheet.getNamespace().get("mPer");
+        mLuc         = (Label)      bxmlSheet.getNamespace().get("mLuc");
+        sHP          = (Label)      bxmlSheet.getNamespace().get("sHP");
+        sAC          = (Label)      bxmlSheet.getNamespace().get("sAC");
+        className    = (Label)      bxmlSheet.getNamespace().get("className");
+        alignment    = (ListButton) bxmlSheet.getNamespace().get("alignment");
         cancelButton = (PushButton) bxmlSheet.getNamespace().get("cancelButton");
         reroll       = (PushButton) bxmlSheet.getNamespace().get("reroll");
         saveChar     = (PushButton) bxmlSheet.getNamespace().get("saveChar");
         cName        = (TextInput)  bxmlSheet.getNamespace().get("cName");
-        
-        classList.setListData(MainScreen.getInstance().getWizDB().getClassList());
         
         cancelButton.getButtonPressListeners().add(new ButtonPressListener() {
             @Override
@@ -84,16 +100,15 @@ public class AddCharacter implements BarryDialog {
             }
         });
         
-        classList.getListButtonSelectionListeners().add(new ListButtonSelectionListener() {
+        alignment.getListButtonSelectionListeners().add(new ListButtonSelectionListener() {
             @Override
-            public void selectedItemChanged(ListButton listButton, Object previousSelectedItem) {
-            	guy.setClassName((String) classList.getSelectedItem());
-            	guy.setClassId(MainScreen.getInstance().getWizDB().getClassId(guy.getClassName()));
+            public void selectedIndexChanged(ListButton listButton, int previousSelectedIndex) {
+            	guy.setAlignment((String) alignment.getSelectedItem());
             }
-
             @Override
-            public void selectedIndexChanged(ListButton listButton, int previousSelectedIndex) {}
+            public void selectedItemChanged(ListButton listButton, Object previousSelectedItem) {}
         });
+
     }
 	
     public void open() {
@@ -131,11 +146,11 @@ public class AddCharacter implements BarryDialog {
     	if (guy.getName().isEmpty()) {
     		msg += "Character Name must be provided! ";
     	}
-    	if (guy.getClassName().isEmpty()) {
-    		msg += "A Character Class must be selected! ";
-    	}
     	if (!MainScreen.getInstance().getWizDB().validateName(guy.getName())) {
     		msg += "Character Name must be unique! ";
+    	}
+    	if (guy.getAlignment().isEmpty()) {
+    		msg += "Alignment must be provided! ";
     	}
     	if (!msg.isEmpty()) {
     		Prompt.prompt(MessageType.WARNING, msg, window);
@@ -147,12 +162,21 @@ public class AddCharacter implements BarryDialog {
     
     private void rePaint() {
     	sStr.setText(guy.getStats().getStrength().toString());
-    	sDex.setText(guy.getStats().getDexterity().toString());
-    	sCon.setText(guy.getStats().getConstitution().toString());
+    	sAgi.setText(guy.getStats().getAgility().toString());
+    	sSta.setText(guy.getStats().getStamina().toString());
     	sInt.setText(guy.getStats().getIntelligence().toString());
-    	sWis.setText(guy.getStats().getWisdom().toString());
+    	sPer.setText(guy.getStats().getPersonality().toString());
     	sLuc.setText(guy.getStats().getLuck().toString());
-    	classList.clearSelection();
+    	mStr.setText(guy.getStats().getAdjStrength().toString());
+    	mAgi.setText(guy.getStats().getAdjAgility().toString());
+    	mSta.setText(guy.getStats().getAdjStamina().toString());
+    	mInt.setText(guy.getStats().getAdjIntelligence().toString());
+    	mPer.setText(guy.getStats().getAdjPersonality().toString());
+    	mLuc.setText(guy.getStats().getAdjLuck().toString());
+    	sHP.setText(guy.getCombatStats().getMaxHP().toString());
+    	sAC.setText(guy.getCombatStats().getMaxAC().toString());
+    	alignment.clear();
+    	className.setText(guy.getZeroLevelOccupation().getName());
     	cName.setText("");
     }
 

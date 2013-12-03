@@ -16,6 +16,7 @@ public class MainMenu implements BarryDialog {
     @BXML private Sheet  menuSheet;  
     
     @BXML private PushButton characterButton = null;
+    @BXML private PushButton funnelButton    = null;
     @BXML private PushButton loadButton      = null;
     @BXML private PushButton partyButton     = null;
     @BXML private PushButton saveButton      = null;
@@ -31,6 +32,7 @@ public class MainMenu implements BarryDialog {
         this.menuSheet = (Sheet) bxmlSheet.readObject(MainMenu.class, "main_menu.bxml");
         
         characterButton = (PushButton) bxmlSheet.getNamespace().get("characterButton");
+        funnelButton    = (PushButton) bxmlSheet.getNamespace().get("funnelButton");
         loadButton      = (PushButton) bxmlSheet.getNamespace().get("loadButton");
         partyButton     = (PushButton) bxmlSheet.getNamespace().get("partyButton");
         saveButton      = (PushButton) bxmlSheet.getNamespace().get("saveButton");
@@ -40,6 +42,18 @@ public class MainMenu implements BarryDialog {
             public void buttonPressed(Button button) {
             	menuSheet.close();
                 MainScreen.getInstance().getCharManager().open();
+            }
+        });
+        
+        funnelButton.getButtonPressListeners().add(new ButtonPressListener() {
+            @Override
+            public void buttonPressed(Button button) {
+            	if (!MainScreen.getInstance().getWizDB().verifyFunnel()) {
+            		String msg = "Funnel Adventures are limited to 0 Level Parties. Your Party contains non 0 Level Characters";
+            		Prompt.prompt(MessageType.WARNING, msg, window);
+            	} else {
+            		
+            	}
             }
         });
         

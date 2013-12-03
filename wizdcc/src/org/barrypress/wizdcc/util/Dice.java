@@ -15,6 +15,10 @@ public class Dice {
 		return dX(6);
 	}
 	
+	public static int d4() {
+		return dX(4);
+	}
+	
 	public static int d6(int num) {
 		int sum = 0;
 		for (int x = 0; x < num; x++) {

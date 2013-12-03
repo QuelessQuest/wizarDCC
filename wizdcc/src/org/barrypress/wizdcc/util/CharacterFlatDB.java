@@ -7,10 +7,10 @@ public class CharacterFlatDB {
 	String  name;
 	String  className;
 	Integer strength;
-	Integer dexterity;
-	Integer constitution;
+	Integer agility;
+	Integer stamina;
 	Integer intelligence;
-	Integer wisdom;
+	Integer personality;
 	Integer luck;
 	Integer hp;
 	Integer ac;
@@ -41,17 +41,17 @@ public class CharacterFlatDB {
 	public void setStrength(Integer strength) {
 		this.strength = strength;
 	}
-	public Integer getDexterity() {
-		return dexterity;
+	public Integer getAgility() {
+		return agility;
 	}
-	public void setDexterity(Integer dexterity) {
-		this.dexterity = dexterity;
+	public void setAgility(Integer agility) {
+		this.agility = agility;
 	}
-	public Integer getConstitution() {
-		return constitution;
+	public Integer getStamina() {
+		return stamina;
 	}
-	public void setConstitution(Integer constitution) {
-		this.constitution = constitution;
+	public void setStamina(Integer stamina) {
+		this.stamina = stamina;
 	}
 	public Integer getIntelligence() {
 		return intelligence;
@@ -59,11 +59,11 @@ public class CharacterFlatDB {
 	public void setIntelligence(Integer intelligence) {
 		this.intelligence = intelligence;
 	}
-	public Integer getWisdom() {
-		return wisdom;
+	public Integer getPersonality() {
+		return personality;
 	}
-	public void setWisdom(Integer wisdom) {
-		this.wisdom = wisdom;
+	public void setPersonality(Integer personality) {
+		this.personality = personality;
 	}
 	public Integer getLuck() {
 		return luck;
