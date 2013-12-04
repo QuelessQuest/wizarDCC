@@ -18,12 +18,12 @@
                         			<BoxPane styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'center'}">
                         				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
                               				<Label text="Name " preferredWidth="40" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-											<TextInput bxml:id="cName"  preferredWidth="150" styles="{backgroundColor:'#8A7152'}"/>
+											<TextInput bxml:id="cName"  preferredWidth="150" styles="{font:{size:9}, backgroundColor:'#8A7152', color:'#FFFFFF'}"/>
                         				</BoxPane>
                         				<Label text=" " preferredWidth="30"/>
                         				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
-                        					<Label text="Class/Race/Occupation " preferredWidth="130" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-											<Label bxml:id="className" preferredWidth="100" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                        					<Label text="Occupation: " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+											<Label bxml:id="className" preferredWidth="140" styles="{font:{size:9}, color:'#FFFFFF'}"/>
                         				</BoxPane>
                         				<Label text=" " preferredWidth="30"/>
                         				<BoxPane styles="{horizontalAlignment: 'left', verticalAlignment: 'center'}">
@@ -33,50 +33,92 @@
                         			</BoxPane>
                         		</TablePane.Row>
                         		<TablePane.Row height="1*">
-									<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
-                        				<Separator styles="{padding: 5}"/>
-                        				<BoxPane>
-                              				<Label text="Strength " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sStr" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              				<Label bxml:id="mStr" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-                              			<BoxPane>
-                              				<Label text="Agility " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sAgi" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              				<Label bxml:id="mAgi" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-                              			<BoxPane>
-                              				<Label text="Stamina " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sSta" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              				<Label bxml:id="mSta" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-                              			<BoxPane>
-                              				<Label text="Personality " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sPer" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              				<Label bxml:id="mPer" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-										<BoxPane>
-                              				<Label text="Intelligence " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sInt" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              				<Label bxml:id="mInt" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-                              			<BoxPane>
-                              				<Label text="Luck " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sLuc" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              				<Label bxml:id="mLuc" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-                              			<BoxPane>
-											<Label text=""/>
-                              			</BoxPane>
-                              			<BoxPane>
-                              				<Label text="Hit Points " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sHP" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-                              			<BoxPane>
-                              				<Label text="Armor Class " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
-                              				<Label bxml:id="sAC" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
-                              			</BoxPane>
-									</BoxPane>
+                        			<TablePane>
+                        				<columns>
+                        					<TablePane.Column width="200"/>
+                        					<TablePane.Column width="-1"/>
+                        					<TablePane.Column width="1*"/>
+                        				</columns>
+                        				<rows>
+                        					<TablePane.Row height="1*">
+												<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
+                        							<Label text=""/>
+                        							<BoxPane>
+                              							<Label text="Strength " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sStr" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              							<Label bxml:id="mStr" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>
+                              						<BoxPane>
+                              							<Label text="Agility " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sAgi" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              							<Label bxml:id="mAgi" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>
+                              						<BoxPane>
+                              							<Label text="Stamina " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sSta" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              							<Label bxml:id="mSta" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>			
+                              						<BoxPane>
+                              							<Label text="Personality " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sPer" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              							<Label bxml:id="mPer" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>
+													<BoxPane>
+                              							<Label text="Intelligence " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sInt" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              							<Label bxml:id="mInt" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+			                              			</BoxPane>			
+                              						<BoxPane>
+                              							<Label text="Luck " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sLuc" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              							<Label bxml:id="mLuc" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>
+                              						<BoxPane>
+														<Label text=""/>
+                              						</BoxPane>
+                              						<BoxPane>
+                              							<Label text="Hit Points " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sHP" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>
+                              						<BoxPane>
+                              							<Label text="Armor Class " preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sAC" preferredWidth="20" text="00 " styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>
+												</BoxPane>
+												<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
+													<Label text=""/>
+													<BoxPane>
+														<Label text="Reflex" preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+                              							<Label bxml:id="sReflex" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+                              						</BoxPane>												
+                              						<BoxPane>		
+														<Label text="Fortitude" preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="sFort" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+													</BoxPane>
+													<BoxPane>
+														<Label text="Will" preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="sWill" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+													</BoxPane>
+													<Label text=""/>
+													<Label text="Funds" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													<BoxPane>
+														<Label text="Copper" preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="mCpr" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+													</BoxPane>
+													<BoxPane>
+														<Label text="Silver" preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="mSlv" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+													</BoxPane>
+													<BoxPane>
+														<Label text="Gold" preferredWidth="70" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="mGld" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
+													</BoxPane>
+												</BoxPane>
+												<BoxPane>
+												</BoxPane>
+											</TablePane.Row>
+										</rows>
+									</TablePane>
                         		</TablePane.Row>
                         		<TablePane.Row height="-1">
                         			<BoxPane styles="{padding:5, horizontalAlignment: 'center'}">

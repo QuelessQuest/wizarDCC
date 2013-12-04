@@ -5,12 +5,14 @@ import org.apache.pivot.collections.List;
 
 import org.barrypress.wizdcc.screens.MainScreen;
 import org.barrypress.wizdcc.util.Dice;
+import org.barrypress.wizdcc.util.Funds;
 
 public class Character {
 	
 	private ZeroLevelOccupation zeroLevel;
 	private CombatStats combatStats;
 	private Stats stats;
+	private Funds funds;
 	private Integer level;
 	private String alignment;
 	private String name;
@@ -31,11 +33,14 @@ public class Character {
 		className = "";
 		classId   = 0;
 		level     = 0;
+		funds = new Funds();
+		setInitialFunds();
 	}
 	
 	public void reRoll() {
 		combatStats.clear();
 		stats.reRoll();
+		setCombatStats();
 		zeroLevel = null;
 		zeroLevel = MainScreen.getInstance().getWizDB().getZeroLevelOccupation();
 		alignment = "";
@@ -44,6 +49,8 @@ public class Character {
 		className = "";
 		classId   = 0;
 		level     = 0;
+		funds     = new Funds();
+		setInitialFunds();
 	}
 	
 	private void setCombatStats() {
@@ -57,6 +64,13 @@ public class Character {
 		combatStats.setSpeed(30);
 	}
 	
+	private void setInitialFunds() {
+		funds.addToTotal(Dice.d12(5));
+		if (zeroLevel.getEquipment().equals("Copper")) {
+			funds.addToTotal(zeroLevel.getQuantity());
+		}
+	}
+	
 	public ZeroLevelOccupation getZeroLevelOccupation() { return zeroLevel; }
 	public CombatStats getCombatStats() { return combatStats; }
 	public Stats getStats() { return stats; }
@@ -67,11 +81,12 @@ public class Character {
 	public int getClassId() { return classId; }
 	public Integer getLevel() { return level; }
 	public List<Equipment> getEquipment() { return equipment; }
+	public Funds getFunds() { return funds; }
 	
 	public void setAlignment(String algn) { alignment = algn; }
 	public void setName(String nme) { name = nme; }
 	public void setClassName(String nme) { className = nme; }
 	public void setClassId(int id) { classId = id; }	
 	public void setLevel(int lvl) { level = lvl; }
-
+	public void setFunds(Funds money) { funds = money; }
 }

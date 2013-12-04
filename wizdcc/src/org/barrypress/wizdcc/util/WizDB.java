@@ -10,7 +10,6 @@ import org.apache.pivot.collections.ArrayList;
 
 import org.barrypress.wizdcc.pc.Character;
 import org.barrypress.wizdcc.pc.ZeroLevelOccupation;
-import org.barrypress.wizdcc.screens.MainScreen;
 
 public class WizDB {
 	
@@ -247,14 +246,9 @@ public class WizDB {
     	
     	try {
     		Statement stmt = conn.createStatement();
-    		Integer maxId = 0;
-    		ResultSet rs = stmt.executeQuery("select max(id) as maxid from " + workList);
-    		while (rs.next()) {
-    			maxId = rs.getInt("maxid") + 1;
-    		}
     		
-    		String query = "insert into " + workList + " values (";
-    		query += maxId.toString() + ", ";
+    		String query = "insert into " + workList;
+    		query += " (level, name, classname, strength, agility, stamina, intelligence, personality, luck, hp, ac) values (";
         	query += guy.getLevel().toString() + ", ";
         	query += "'" + guy.getName() + "', ";
         	query += "'" + guy.getClassName() + "', ";
@@ -279,12 +273,15 @@ public class WizDB {
     	ZeroLevelOccupation zLvl = new ZeroLevelOccupation();
     	try {
     		Statement stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("select name, weapon, equipment from ZeroLevel where id = "); 
+    		ResultSet rs = stmt.executeQuery("select name, weapon, equipment, quantity, unit from ZeroLevel where id = " + Dice.d100().toString()); 
     		while (rs.next()) {
     			zLvl.setName(rs.getString("name"));
-    			zLvl.setWeapon(rs.getInt("weapon"));
-    			zLvl.setEquipment(rs.getInt("equipment"));
+    			zLvl.setWeapon(rs.getString("weapon"));
+    			zLvl.setEquipment(rs.getString("equipment"));
+    			zLvl.setQuantity(rs.getInt("quantity"));
+    			zLvl.setUnit(rs.getString("unit"));
     		}
+    		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}

@@ -19,6 +19,22 @@ public class Dice {
 		return dX(4);
 	}
 	
+	public static int d12() {
+		return dX(12);
+	}
+	
+	public static Integer d100() {
+		return dX(100);
+	}
+	
+	public static int d12(int num) {
+		int sum = 0;
+		for (int x = 0; x < num; x++) {
+			sum += d12();
+		}
+		return sum;
+	}
+	
 	public static int d6(int num) {
 		int sum = 0;
 		for (int x = 0; x < num; x++) {
