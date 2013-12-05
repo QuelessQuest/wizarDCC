@@ -9,6 +9,7 @@ import org.apache.pivot.collections.List;
 import org.apache.pivot.collections.ArrayList;
 
 import org.barrypress.wizdcc.pc.Character;
+import org.barrypress.wizdcc.pc.Equipment;
 import org.barrypress.wizdcc.pc.ZeroLevelOccupation;
 
 public class WizDB {
@@ -37,7 +38,6 @@ public class WizDB {
     		}
     		rs.close();
     		stmt.close();
-    		
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
@@ -53,8 +53,8 @@ public class WizDB {
     		while (rs.next()) {
     			rc = rs.getInt("id");
     		}
-    		stmt.close();
     		rs.close();
+    		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
@@ -70,6 +70,8 @@ public class WizDB {
     		while (rs.next()) {
     			valid = false;
     		}
+    		rs.close();
+    		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
@@ -94,6 +96,8 @@ public class WizDB {
     		if (maxLvl > 0) {
     			valid = false;
     		}
+    		rs.close();
+    		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
@@ -110,6 +114,8 @@ public class WizDB {
     		while (rs.next()) {
     			count = rs.getInt("mlvl");
     		}
+    		rs.close();
+    		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
@@ -174,7 +180,7 @@ public class WizDB {
     
     public List<CharacterFlatDB> getAvailableWorkList() {
     	List<CharacterFlatDB> theList = new ArrayList<CharacterFlatDB>();
-		String query = "select id, level, name, className, strength, agility, stamina, intelligence, personality, luck, hp, ac from ";
+		String query = "select id, level, name, className, strength, agility, stamina, intelligence, personality, luck, hp, ac, funds from ";
     	query += "ClassWorkList where not exists (select * from PartyWorkList where ";
 		query += "PartyWorkList.name = ClassWorkList.name)";
 		
@@ -196,16 +202,50 @@ public class WizDB {
     			aChar.setLuck(rs.getInt("luck"));
     			aChar.setHp(rs.getInt("hp"));
     			aChar.setAc(rs.getInt("ac"));
+    			aChar.setFunds(rs.getInt("funds"));
     			theList.add(aChar);
     		}
     		
-    		stmt.close();
     		rs.close();
+    		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
 
     	return theList;
+    }
+
+    public Equipment getEquipmentByName(String name) {
+    	Equipment equip = new Equipment();
+    	
+    	try {
+    		System.out.println("select * from equipment where name='" + name + "'");
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select * from equipment where name='" + name + "'");
+    		
+    		while (rs.next()) {
+    			equip.setName(rs.getString("name"));
+    			equip.setAc(rs.getInt("ac"));
+    			equip.setCost(rs.getInt("cost"));
+    			equip.setDamageDie(rs.getInt("damage_die"));
+    			equip.setDamageNum(rs.getInt("damage_num"));
+    			equip.setFumble(rs.getInt("fumble"));
+    			equip.setId(rs.getInt("id"));
+    			equip.setPenalty(rs.getInt("penalty"));
+    			equip.setQuantity(rs.getInt("quantity"));
+    			equip.setRangeLong(rs.getInt("range_long"));
+    			equip.setRangeMedium(rs.getInt("range_medium"));
+    			equip.setRangeShort(rs.getInt("range_short"));
+    			equip.setSpecial(rs.getInt("special"));
+    			equip.setSpeed(rs.getInt("speed"));
+    		}
+    		rs.close();
+    		stmt.close();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return equip;
     }
     
     private List<CharacterFlatDB> getWorkList(String tableName) {
@@ -213,7 +253,7 @@ public class WizDB {
     	
     	try {
     		Statement stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("select id, level, name, className, strength, agility, stamina, intelligence, personality, luck, hp, ac from " + tableName);
+    		ResultSet rs = stmt.executeQuery("select id, level, name, className, strength, agility, stamina, intelligence, personality, luck, hp, ac, funds from " + tableName);
     		
     		while (rs.next()) {
     			CharacterFlatDB aChar = new CharacterFlatDB();
@@ -229,11 +269,12 @@ public class WizDB {
     			aChar.setLuck(rs.getInt("luck"));
     			aChar.setHp(rs.getInt("hp"));
     			aChar.setAc(rs.getInt("ac"));
+    			aChar.setFunds(rs.getInt("funds"));
     			theList.add(aChar);
     		}
     		
-    		stmt.close();
     		rs.close();
+    		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
@@ -248,7 +289,7 @@ public class WizDB {
     		Statement stmt = conn.createStatement();
     		
     		String query = "insert into " + workList;
-    		query += " (level, name, classname, strength, agility, stamina, intelligence, personality, luck, hp, ac) values (";
+    		query += " (level, name, classname, strength, agility, stamina, intelligence, personality, luck, hp, ac, funds) values (";
         	query += guy.getLevel().toString() + ", ";
         	query += "'" + guy.getName() + "', ";
         	query += "'" + guy.getClassName() + "', ";
@@ -259,7 +300,8 @@ public class WizDB {
         	query += guy.getPersonality().toString() + ", ";
         	query += guy.getLuck().toString() + ", ";
         	query += guy.getHp().toString() + ", ";
-        	query += guy.getAc().toString() + ")";
+        	query += guy.getAc().toString() + ", ";
+        	query += guy.getFunds().toString() + ")";
         	
     		stmt.executeUpdate(query);
     		stmt.close();
@@ -281,6 +323,7 @@ public class WizDB {
     			zLvl.setQuantity(rs.getInt("quantity"));
     			zLvl.setUnit(rs.getString("unit"));
     		}
+    		rs.close();
     		stmt.close();
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -323,6 +366,7 @@ public class WizDB {
     	flatGuy.setPersonality(guy.getStats().getPersonality());
     	flatGuy.setStamina(guy.getStats().getStamina());
     	flatGuy.setStrength(guy.getStats().getStrength());
+    	flatGuy.setFunds(guy.getFunds().getTotal());
     	
     	return flatGuy;
     }

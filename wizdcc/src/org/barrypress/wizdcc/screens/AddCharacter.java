@@ -15,6 +15,7 @@ import org.apache.pivot.wtk.TextInput;
 import org.apache.pivot.wtk.Window;
 
 import org.barrypress.wizdcc.pc.Character;
+import org.barrypress.wizdcc.pc.Equipment;
 
 public class AddCharacter implements BarryDialog { 
 	
@@ -40,7 +41,19 @@ public class AddCharacter implements BarryDialog {
     @BXML private Label mCpr;
     @BXML private Label mSlv;
     @BXML private Label mGld;
+    @BXML private Label wpn1;
+    @BXML private Label dmg1;
+    @BXML private Label rng1;
+    @BXML private Label wpn2;
+    @BXML private Label dmg2;
+    @BXML private Label rng2;
+    @BXML private Label armor;
+    @BXML private Label aAc;
+    @BXML private Label aPenalty;
+    @BXML private Label aSpeed;
+    @BXML private Label aFumble;
     @BXML private Label className;
+    @BXML private Label zEquip;
     @BXML private ListButton alignment;
     @BXML private PushButton cancelButton;
     @BXML private PushButton reroll;
@@ -79,7 +92,19 @@ public class AddCharacter implements BarryDialog {
         sReflex      = (Label)      bxmlSheet.getNamespace().get("sReflex");
         sFort        = (Label)      bxmlSheet.getNamespace().get("sFort");
         sWill        = (Label)      bxmlSheet.getNamespace().get("sWill");
+        wpn1         = (Label)      bxmlSheet.getNamespace().get("wpn1");
+        rng1         = (Label)      bxmlSheet.getNamespace().get("rng1");
+        dmg1         = (Label)      bxmlSheet.getNamespace().get("dmg1");
+        wpn2         = (Label)      bxmlSheet.getNamespace().get("wpn2");
+        rng2         = (Label)      bxmlSheet.getNamespace().get("rng2");
+        dmg2         = (Label)      bxmlSheet.getNamespace().get("dmg2");
+        armor        = (Label)      bxmlSheet.getNamespace().get("armor");
+        aAc          = (Label)      bxmlSheet.getNamespace().get("aAc");
+        aSpeed       = (Label)      bxmlSheet.getNamespace().get("aSpeed");
+        aPenalty     = (Label)      bxmlSheet.getNamespace().get("aPenalty");
+        aFumble      = (Label)      bxmlSheet.getNamespace().get("aFumble");
         className    = (Label)      bxmlSheet.getNamespace().get("className");
+        zEquip       = (Label)      bxmlSheet.getNamespace().get("zEquip");
         alignment    = (ListButton) bxmlSheet.getNamespace().get("alignment");
         cancelButton = (PushButton) bxmlSheet.getNamespace().get("cancelButton");
         reroll       = (PushButton) bxmlSheet.getNamespace().get("reroll");
@@ -193,6 +218,54 @@ public class AddCharacter implements BarryDialog {
     	mCpr.setText(guy.getFunds().getCopper().toString());
     	mSlv.setText(guy.getFunds().getSilver().toString());
     	mGld.setText(guy.getFunds().getGold().toString());
+    	
+    	wpn1.setText("");
+    	dmg1.setText("");
+    	rng1.setText("");
+    	wpn2.setText("");
+    	dmg2.setText("");
+    	rng2.setText("");
+    	armor.setText("");
+    	aAc.setText("");
+    	aPenalty.setText("");
+    	aFumble.setText("");
+    	aSpeed.setText("");
+    	
+    	Equipment stuff = guy.getZeroLevelOccupation().getEquipWeapon();
+    	if (!stuff.getName().isEmpty()) {
+    		wpn1.setText(stuff.getName());
+    		dmg1.setText(stuff.getDamageNum() + "d" + stuff.getDamageDie());
+    		if (stuff.getRangeShort() > 0) {
+    			rng1.setText(stuff.getRangeShort().toString() + "/" + stuff.getRangeMedium().toString() + "/" + stuff.getRangeLong());
+    		}
+    	}
+    	stuff = guy.getZeroLevelOccupation().getEquipEquipment();
+    	if (!stuff.getName().isEmpty()) {
+    		if (stuff.getDamageNum() > 0) {
+    			wpn2.setText(stuff.getName());
+    			dmg2.setText(stuff.getDamageNum() + "d" + stuff.getDamageDie());
+        		if (stuff.getRangeShort() > 0) {
+        			rng2.setText(stuff.getRangeShort().toString() + "/" + stuff.getRangeMedium().toString() + "/" + stuff.getRangeLong());
+        		}
+    		} else {
+    			if (stuff.getAc() > 0) {
+    				armor.setText(stuff.getName());
+    				aAc.setText(stuff.getAc().toString());
+    				aPenalty.setText((stuff.getPenalty() > 0 ? "-" : "") + stuff.getPenalty().toString());
+    				aSpeed.setText((stuff.getSpeed() > 0 ? "-" : "") + stuff.getSpeed().toString());
+    				aFumble.setText((stuff.getFumble() > 0 ? "1d" : "") + stuff.getFumble().toString());    				
+    			} else {
+    				String eText = stuff.getName();
+    				if (!guy.getZeroLevelOccupation().getUnit().isEmpty()) {
+    					eText += " " + guy.getZeroLevelOccupation().getQuantity().toString() + " " + guy.getZeroLevelOccupation().getUnit();
+    				} else if (guy.getZeroLevelOccupation().getQuantity() > 1) {
+    					eText += "x" + guy.getZeroLevelOccupation().getQuantity().toString();
+    				}
+    				zEquip.setText(eText);
+    			}
+    		}
+    	}
+    	
     	alignment.clear();
     	className.setText(guy.getZeroLevelOccupation().getName());
     	cName.setText("");

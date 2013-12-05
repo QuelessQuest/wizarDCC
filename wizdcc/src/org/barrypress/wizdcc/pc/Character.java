@@ -24,6 +24,7 @@ public class Character {
 	public Character() {
 		stats = new Stats();
 		zeroLevel = MainScreen.getInstance().getWizDB().getZeroLevelOccupation();
+		zeroLevel.setEquipment();
 		combatStats = new CombatStats();
 		setCombatStats();
 		equipment = new ArrayList<Equipment>();
@@ -43,6 +44,7 @@ public class Character {
 		setCombatStats();
 		zeroLevel = null;
 		zeroLevel = MainScreen.getInstance().getWizDB().getZeroLevelOccupation();
+		zeroLevel.setEquipment();
 		alignment = "";
 		name      = "";
 		race      = "Human";

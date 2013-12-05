@@ -36,7 +36,7 @@
                         			<TablePane>
                         				<columns>
                         					<TablePane.Column width="200"/>
-                        					<TablePane.Column width="-1"/>
+                        					<TablePane.Column width="150"/>
                         					<TablePane.Column width="1*"/>
                         				</columns>
                         				<rows>
@@ -114,7 +114,45 @@
 														<Label bxml:id="mGld" text="0" preferredWidth="20" styles="{font:{size:9}, color:'#FFFFFF', horizontalAlignment: 'center'}"/>
 													</BoxPane>
 												</BoxPane>
-												<BoxPane>
+												<BoxPane orientation="vertical" styles="{padding:4, spacing:5, horizontalAlignment: 'left', verticalAlignment: 'top'}">
+													<Label text=""/>
+													<BoxPane>
+														<Label text="Weapon" preferredWidth="90" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label text="Damage" preferredWidth="50" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label text="Range" preferredWidth="50" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													</BoxPane>
+													<BoxPane>
+														<Label bxml:id="wpn1" preferredWidth="90" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="dmg1" preferredWidth="50" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="rng1" preferredWidth="50" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													</BoxPane>
+													<BoxPane>
+														<Label bxml:id="wpn2" preferredWidth="90" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="dmg2" preferredWidth="50" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="rng2" preferredWidth="50" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													</BoxPane>
+													<Label text=""/>
+													<BoxPane>
+														<Label text="Armor" preferredWidth="90" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label text="AC" preferredWidth="30" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label text="Penalty" preferredWidth="50" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label text="Speed" preferredWidth="40" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label text="Fumble" preferredWidth="40" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													</BoxPane>
+													<BoxPane>
+														<Label bxml:id="armor" preferredWidth="90" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="aAc" preferredWidth="30" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="aPenalty" preferredWidth="50" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="aSpeed" preferredWidth="40" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+														<Label bxml:id="aFumble" preferredWidth="40" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													</BoxPane>
+													<Label text=""/>
+													<BoxPane>
+														<Label text="Equipment" preferredWidth="90" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													</BoxPane>
+													<BoxPane>
+														<Label bxml:id="zEquip" text="" styles="{font:{size:9}, color:'#FFFFFF'}"/>
+													</BoxPane>
 												</BoxPane>
 											</TablePane.Row>
 										</rows>

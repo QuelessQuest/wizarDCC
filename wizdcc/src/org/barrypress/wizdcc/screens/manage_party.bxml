@@ -24,6 +24,7 @@
 							  <TableView.Column width="30" name="luck" headerData="LUC"/>
 							  <TableView.Column width="30" name="hp" headerData="HP"/>
 							  <TableView.Column width="30" name="ac" headerData="AC"/>
+							  <TableView.Column width="40" name="funds" headerData="Funds"/>
                             </columns>
                           </TableView>
                           <columnHeader>

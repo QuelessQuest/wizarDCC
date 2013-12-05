@@ -14,6 +14,7 @@ public class CharacterFlatDB {
 	Integer luck;
 	Integer hp;
 	Integer ac;
+	Integer funds;
 	
 	public Integer getId() { return id; }
 	public void setId(Integer id) { this.id = id; }
@@ -83,5 +84,7 @@ public class CharacterFlatDB {
 	public void setAc(Integer ac) {
 		this.ac = ac;
 	}
+	public void setFunds(Integer funds) { this.funds = funds; }
+	public Integer getFunds() { return this.funds; }
 
 }
